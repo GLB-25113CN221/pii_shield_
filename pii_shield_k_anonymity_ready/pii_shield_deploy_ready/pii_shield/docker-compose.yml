@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    ports: ["8501:8501"]
+    environment:
+      PORT: 8501
+      OLLAMA_URL: http://ollama:11434
+    depends_on: [ollama]
+  ollama:
+    image: ollama/ollama:latest
+    ports: ["11434:11434"]
+    volumes: ["ollama:/root/.ollama"]
+  model-pull:
+    image: ollama/ollama:latest
+    depends_on: [ollama]
+    entrypoint: ["/bin/sh","-c","sleep 8; ollama pull qwen2.5:7b"]
+    environment: {OLLAMA_HOST: "http://ollama:11434"}
+    restart: "no"
+volumes:
+  ollama:

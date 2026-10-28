@@ -1,0 +1,1 @@
+from detectors.identifiers import detect_identifiers

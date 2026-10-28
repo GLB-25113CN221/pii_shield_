@@ -1,0 +1,19 @@
+# PII Shield Agent — limitations (one-page summary)
+
+- This is a privacy-support prototype, not a legal compliance certification, and not a guarantee that all personal data will be found or removed.
+- Detection precision/recall depends on language, document quality, layout, OCR quality, model availability and context. The built-in evaluation uses a small synthetic dataset and is not a real-world benchmark.
+- Indian identifier formats are detected with local patterns, Presidio PatternRecognizers, and selected checksum checks. Selected Presidio built-in recognizers and custom Indian PatternRecognizers are used. Presidio AnalyzerEngine/context enhancement is used when its NLP model is installed; otherwise the custom recognizer fallback is used. Not every identifier has a public checksum; valid-looking patterns can still be false positives.
+- Aadhaar checksum validation is helpful but cannot establish that an identifier was issued or belongs to a person. OCR digit substitutions can still cause misses.
+- AI4Bharat IndicNER supports Assamese, Bengali, Gujarati, Hindi, Kannada, Malayalam, Marathi, Odia, Punjabi, Tamil, and Telugu, but model access is gated and its weights must be accepted/downloaded separately. Without cached weights, the app falls back to field-label heuristics and optional English spaCy NER; these are weaker, especially for unlabelled names and mixed-script text.
+- The LLM agent requires a running local Ollama server and a pulled model. If unavailable, the app labels the run “Rule-only mode (no agent)”. Agent outputs can be inconsistent and must be reviewed.
+- OCR of scanned PDFs rebuilds pages as images and may reduce accessibility, searchable text, form fields, links, signatures, metadata, or original vector quality. Complex layouts may not redact perfectly.
+- Text-layer PDF redaction, DOCX paragraph replacement, and image-box redaction have different limitations. Embedded attachments, comments, tracked changes, hidden layers, QR/barcodes, handwriting, and unusual embedded objects may retain data.
+- Contextual re-identification risk and relationship signals are rule-based heuristics, not a trained relation extractor, full knowledge graph, or calibrated probability. Risk-adaptive action suggestions are advisory and do not yet implement automated truthful generalization. Uncertainty prioritization does not train the model. The mutation suite is a small synthetic smoke test, not an adversarial benchmark. Red-team verification is detector-based; it cannot prove absence of PII, and semantic/rephrased leaks may escape it.
+- Audit logs store category/count metadata, not matched values, but the operating system, Streamlit session, temporary files, backups, crash dumps, or downloaded outputs remain outside that narrow guarantee. Use only authorized test documents.
+- Local-first means document content is sent only to localhost Ollama by this application; OS-level services and separately installed components are outside the app's control. Model downloads require internet before offline use.
+- Human review is recommended for low-confidence candidates and any high-impact use. Never treat the output as a substitute for professional privacy/security review.
+
+
+## Tabular k-anonymity feature (prototype)
+
+The K-Anonymity tab operates on CSV tables only. It drops user-selected direct identifiers, generalizes user-selected quasi-identifiers, and verifies equivalence-class sizes in the released table. The result is conditional on the user's column selections and does not establish l-diversity, t-closeness, differential privacy, or protection against all linkage attacks. Sensitive columns can remain and may be disclosed even when k-anonymity passes. Review the transformed output, external-join risks, metadata, and data utility before any real release. See `K_ANONYMITY.md`.

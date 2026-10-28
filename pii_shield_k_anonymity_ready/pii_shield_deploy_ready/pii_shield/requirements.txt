@@ -1,0 +1,15 @@
+streamlit>=1.38
+Pillow>=10.0
+pytesseract>=0.3.10
+PyMuPDF>=1.24.3
+python-docx>=1.1
+reportlab>=4.0
+pandas>=2.2
+pytest>=8.0
+# Optional multilingual NER (install model weights separately for offline use):
+transformers>=4.40
+# Presidio's recognizer framework. Uses AnalyzerEngine when an English spaCy
+# model is installed, and PatternRecognizer fallback otherwise.
+presidio-analyzer>=2.2.355
+# Required to run transformer inference (CPU or platform-specific wheel).
+torch>=2.2

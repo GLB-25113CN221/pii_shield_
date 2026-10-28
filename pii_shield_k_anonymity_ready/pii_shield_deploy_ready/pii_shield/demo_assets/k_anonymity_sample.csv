@@ -1,0 +1,13 @@
+record_id,name,age,district,occupation,condition
+R001,Aarav Mehta,21,North,Teacher,Asthma
+R002,Diya Shah,22,North,Teacher,Diabetes
+R003,Ishaan Rao,23,North,Teacher,Asthma
+R004,Anaya Sen,24,North,Clerk,Hypertension
+R005,Vihaan Das,43,South,Farmer,Diabetes
+R006,Myra Nair,44,South,Farmer,Asthma
+R007,Arjun Patel,45,South,Farmer,Hypertension
+R008,Sara Khan,46,South,Clerk,Asthma
+R009,Kabir Joshi,62,East,Doctor,Diabetes
+R010,Ira Bose,63,East,Doctor,Hypertension
+R011,Reyansh Iyer,64,East,Doctor,Asthma
+R012,Meera Gill,65,East,Nurse,Diabetes
